@@ -5,7 +5,13 @@
   <groupId>org.selenide.examples</groupId>
   <artifactId>selenide-cucumber</artifactId>
   <version>1.0-SNAPSHOT</version>
-  
+
+  <properties>
+      <maven.compiler.source>1.8</maven.compiler.source>
+      <maven.compiler.target>1.8</maven.compiler.target>
+      <cucumber.version>1.2.5</cucumber.version>
+  </properties>
+
   <build>
     <defaultGoal>dependency:copy-dependencies test</defaultGoal>
     <plugins>
@@ -16,6 +22,7 @@
           <systemPropertyVariables>
             <selenide.headless>true</selenide.headless>
           </systemPropertyVariables>
+            <argLine>-Dfile.encoding=UTF-8</argLine>
         </configuration>
       </plugin>
     </plugins>
@@ -23,16 +30,21 @@
   
   <dependencies>
     <dependency>
-      <groupId>io.cucumber</groupId>
+      <groupId>info.cukes</groupId>
       <artifactId>cucumber-java</artifactId>
-      <version>3.0.2</version>
+      <version>${cucumber.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>io.cucumber</groupId>
+      <groupId>info.cukes</groupId>
       <artifactId>cucumber-junit</artifactId>
-      <version>3.0.2</version>
+      <version>${cucumber.version}</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>info.cukes</groupId>
+      <artifactId>cucumber-guice</artifactId>
+      <version>${cucumber.version}</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -43,10 +55,29 @@
     <dependency>
       <groupId>com.codeborne</groupId>
       <artifactId>selenide</artifactId>
-      <version>4.12.2</version>
+      <version>5.1.0</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+    </dependency>
   </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.google.inject</groupId>
+        <artifactId>guice</artifactId>
+        <version>4.1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>23.0</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <reporting>
     <plugins>
